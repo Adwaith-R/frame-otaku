@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frame-otaku
+  labels:
+    app: frame-otaku
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frame-otaku
+  template:
+    metadata:
+      labels:
+        app: frame-otaku
+    spec:
+      containers:
+        - name: frame-otaku
+          image: frame-otaku:1.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "32Mi"
+            limits:
+              cpu: "250m"
+              memory: "128Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frame-otaku-service
+spec:
+  type: NodePort
+  selector:
+    app: frame-otaku
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080

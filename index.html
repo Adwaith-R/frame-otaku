@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0d14"><title>FRAME//OTAKU — Anime & Cinema</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Frame Otaku home"><span class="brand-mark">F<span>✦</span></span><span>FRAME<span class="brand-muted">//OTAKU</span></span></a>
+    <nav class="nav"><a href="#discover">Discover</a><a href="#trending">Trending</a><a href="#updates">Updates</a></nav>
+    <div class="header-actions"><button class="icon-btn" id="settingsBtn" title="API settings" aria-label="API settings">⚙</button><span class="live-dot"></span><span class="live-label">LIVE DISCOVERY</span></div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> YOUR NEXT OBSESSION STARTS HERE</div>
+        <h1>Stories worth<br>staying <em>up for.</em></h1>
+        <p class="hero-desc">One place for anime discoveries, movie nights, and the latest screen-culture updates.</p>
+        <div class="hero-actions"><a class="primary-btn" href="#discover">Explore titles <span>↗</span></a><a class="text-btn" href="#updates">Catch the updates <span>↓</span></a></div>
+        <div class="hero-stats"><div><strong id="animeCount">—</strong><span>ANIME TO EXPLORE</span></div><i></i><div><strong id="movieCount">—</strong><span>MOVIES TO DISCOVER</span></div></div>
+      </div>
+      <div class="hero-art">
+        <div class="art-grid"></div><div class="art-ring ring-a"></div><div class="art-ring ring-b"></div>
+        <div class="art-label label-top">ISSUE 001 <span> / SCREEN CULTURE</span></div>
+        <div class="poster-stack"><div class="poster poster-back"></div><div class="poster poster-front"><div class="poster-sheen"></div><div class="poster-caption"><span>YOUR WATCHLIST STARTS NOW</span><strong>FIND<br>YOUR<br><i>WORLD.</i></strong></div><div class="poster-index">F/O — 001</div></div></div>
+        <div class="floating-tag tag-one"><span class="tag-dot"></span> NEW WORLDS, EVERY DAY</div><div class="floating-tag tag-two">ANIME <b>+</b> CINEMA</div>
+        <div class="art-label label-bottom">SCROLL TO EXPLORE <span>⌄</span></div>
+      </div>
+    </section>
+
+    <section class="search-panel" id="discover">
+      <div><div class="section-kicker">THE SEARCH ROOM</div><h2>Find your <em>next watch.</em></h2></div>
+      <form id="searchForm" class="search-form"><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search anime, movies, genres..." autocomplete="off"><kbd>ENTER ↵</kbd></label><button class="primary-btn search-submit" type="submit">Search <span>↗</span></button></form>
+      <div class="search-controls"><div class="segmented" id="searchType"><button type="button" class="active" data-type="all">Everything</button><button type="button" data-type="anime">Anime</button><button type="button" data-type="movie">Movies</button></div><span id="searchHint">Search powered by Jikan + TMDB (API key required for movies)</span></div>
+    </section>
+
+    <section class="content-section" id="trending">
+      <div class="section-head"><div><div class="section-kicker">THE CURRENT ROTATION</div><h2>Trending <em>right now.</em></h2></div><div class="head-controls"><div class="segmented" id="trendType"><button type="button" class="active" data-type="anime">Anime</button><button type="button" data-type="movie">Movies</button></div><button type="button" class="round-btn" id="refreshTrending" title="Refresh trending">↻</button></div></div>
+      <div class="card-grid" id="trendingGrid"><div class="loading-card">Loading trending anime<span>Fetching fresh picks…</span></div></div>
+    </section>
+
+    <section class="updates-section" id="updates">
+      <div class="updates-intro"><div class="section-kicker">TRANSMISSION INCOMING</div><h2>Fresh from<br>the <em>screen world.</em></h2><p>New releases, seasonal anime, and stories from the worlds you love.</p><div class="source-note"><span class="live-dot"></span> LIVE DATA FROM PUBLIC APIS</div></div>
+      <div class="updates-content"><div class="updates-tabs"><button type="button" class="active" data-update="anime">Anime updates</button><button type="button" data-update="movies">Movie releases</button></div><div id="updatesList" class="updates-list"><div class="update-loading">Loading the latest updates…</div></div><p class="disclaimer">Data is supplied by third-party APIs. Availability and release dates may vary by region.</p></div>
+    </section>
+    <section class="search-results-section hidden" id="resultsSection"><div class="section-head"><div><div class="section-kicker">YOUR RESULTS</div><h2 id="resultsTitle">Search <em>results.</em></h2></div><button type="button" class="text-btn" id="clearResults">Clear results ×</button></div><div id="resultsGrid" class="card-grid"></div></section>
+    <footer><a class="brand footer-brand" href="#"><span class="brand-mark">F<span>✦</span></span><span>FRAME<span class="brand-muted">//OTAKU</span></span></a><span>BUILT FOR THE LOVE OF STORIES.</span><span>Data: Jikan API · TMDB</span></footer>
+  </main>
+
+  <dialog id="settingsDialog" class="settings-dialog"><form method="dialog" id="settingsForm"><div class="dialog-head"><div><div class="section-kicker">OPTIONAL CONFIGURATION</div><h2>API <em>settings.</em></h2></div><button class="icon-btn" value="cancel" aria-label="Close settings">✕</button></div><p>Anime works without a key. To enable live movie search and trending, add a free TMDB API Read Access Token.</p><label class="field-label" for="tmdbKey">TMDB Read Access Token</label><input id="tmdbKey" class="api-input" type="password" placeholder="Paste your TMDB token"><div class="dialog-actions"><a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noreferrer">Get a TMDB API key ↗</a><button class="primary-btn" id="saveKey" type="button">Save settings <span>✓</span></button></div><p class="tiny-note">The token is stored only in this browser's local storage. For a public production deployment, proxy API calls through a backend instead of exposing a secret.</p></form></dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
